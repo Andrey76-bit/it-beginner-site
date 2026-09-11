@@ -137,3 +137,45 @@ def test_12_no_js_errors_main(driver):
     for log in severe:
         print(f"JS ERROR: {log['message']}")
     assert len(severe) == 0, f"Найдено {len(severe)} критических JS-ошибок"
+
+
+def test_13_language_switch_to_en(driver):
+    """Переключение на английский меняет текст"""
+    driver.get(BASE_URL)
+    time.sleep(2)
+
+    h1_before = driver.find_element(By.TAG_NAME, "h1").text
+
+    buttons = driver.find_elements(By.TAG_NAME, "button")
+    for btn in buttons:
+        if "English" in btn.text:
+            btn.click()
+            break
+
+    time.sleep(1)
+    h1_after = driver.find_element(By.TAG_NAME, "h1").text
+
+    assert h1_before != "" and h1_after != "", "Заголовок потерялся"
+
+
+def test_14_language_switch_back_to_ru(driver):
+    """Переключение обратно на русский работает"""
+    driver.get(BASE_URL)
+    time.sleep(2)
+
+    buttons = driver.find_elements(By.TAG_NAME, "button")
+    for btn in buttons:
+        if "English" in btn.text:
+            btn.click()
+            break
+    time.sleep(1)
+
+    buttons = driver.find_elements(By.TAG_NAME, "button")
+    for btn in buttons:
+        if "Русский" in btn.text:
+            btn.click()
+            break
+    time.sleep(1)
+
+    page_text = driver.find_element(By.TAG_NAME, "body").text
+    assert "проводник" in page_text.lower(), "Русский текст не восстановился"
