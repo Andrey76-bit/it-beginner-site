@@ -10,6 +10,13 @@
     <header>
         <h1 data-i18n="title">IT Start</h1>
         <p data-i18n="subtitle">Твой проводник в мир технологий</p>
+        <nav class="main-nav">
+            <a href="#professions" data-i18n="nav_professions">Профессии</a>
+            <a href="#start" data-i18n="nav_start">С чего начать</a>
+            <a href="#history" data-i18n="nav_history">Моя история</a>
+            <a href="#knowledge" data-i18n="nav_knowledge">Что нужно</a>
+            <a href="contacts.html" data-i18n="nav_contacts">Контакты</a>
+        </nav>
         <div class="lang-switch">
             <button onclick="setLanguage('ru')">Русский</button>
             <button onclick="setLanguage('en')">English</button>
@@ -17,7 +24,7 @@
     </header>
 
     <main>
-        <section class="accordion-item">
+        <section id="professions" class="accordion-item">
             <h2 class="section-professions accordion-header" data-i18n="professions_title">Выбери свою профессию</h2>
             <div class="accordion-content">
                 <ul>
@@ -43,7 +50,7 @@
             </div>
         </section>
 
-        <section class="accordion-item">
+        <section id="start" class="accordion-item">
             <h2 class="section-start accordion-header" data-i18n="start_title">С чего начать?</h2>
             <div class="accordion-content">
                 <ol>
@@ -56,14 +63,14 @@
             </div>
         </section>
 
-        <section class="accordion-item">
+        <section id="history" class="accordion-item">
             <h2 class="section-history accordion-header" data-i18n="history_title">Моя история</h2>
             <div class="accordion-content">
                 <p data-i18n="history_text">Привет! Я Андрей. Мой путь в IT начался с старого ноутбука ASUS и желания освоить новую профессию. Я установил Linux, научился работать с терминалом, изучил Python, SQL, Selenium, Playwright, Docker, CI/CD и основы безопасности. Сегодня у меня есть портфолио на GitHub и первые отклики от работодателей. Я верю, что каждый может войти в IT, если идти шаг за шагом и не сдаваться.</p>
             </div>
         </section>
 
-        <section class="accordion-item">
+        <section id="knowledge" class="accordion-item">
             <h2 class="section-knowledge accordion-header" data-i18n="knowledge_title">Что нужно для старта</h2>
             <div class="accordion-content">
                 <ul>
