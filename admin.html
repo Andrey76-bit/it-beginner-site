@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка — Генератор контактов</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-form { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .admin-form label { display: block; margin: 15px 0 5px; color: #e0e0e0; }
+        .admin-form input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #444; background: #1e1e1e; color: #fff; font-size: 15px; }
+        .admin-form button { margin-top: 20px; padding: 12px 24px; background: #4fc3f7; color: #000; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+        .admin-form button:hover { background: #29b6f6; }
+        .output-block { margin-top: 30px; }
+        .output-block textarea { width: 100%; height: 300px; background: #1e1e1e; color: #4fc3f7; border: 1px solid #444; border-radius: 6px; padding: 15px; font-family: monospace; font-size: 13px; }
+        .copy-btn { margin-top: 10px; padding: 10px 20px; background: #66bb6a; color: #000; border: none; border-radius: 6px; cursor: pointer; }
+        .copy-btn:hover { background: #4caf50; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Генератор контактов</h1>
+        <p>Заполни поля → нажми «Сгенерировать» → скопируй код в contacts.html</p>
+        <nav class="main-nav">
+            <a href="index.html">На главную</a>
+            <a href="contacts.html">Контакты</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="admin-form">
+            <label>📱 Телефон</label>
+            <input type="text" id="phone" placeholder="+7 968 193-65-23">
+
+            <label>✉️ Email</label>
+            <input type="text" id="email" placeholder="andrey@example.com">
+
+            <label>💬 Telegram</label>
+            <input type="text" id="telegram" placeholder="@Andrey76bit">
+
+            <label>🐙 GitHub</label>
+            <input type="text" id="github" placeholder="@Andrey76-bit">
+
+            <label>🔵 ВКонтакте</label>
+            <input type="text" id="vk" placeholder="andrey76bit">
+
+            <label>📷 Instagram</label>
+            <input type="text" id="instagram" placeholder="@andrey76bit">
+
+            <button onclick="generateCode()">Сгенерировать HTML</button>
+        </div>
+
+        <div class="output-block admin-form">
+            <label>Готовый HTML-код (скопируй в contacts.html):</label>
+            <textarea id="output" readonly></textarea>
+            <button class="copy-btn" onclick="copyCode()">📋 Скопировать код</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Сделано с душой для начинающих айтишников</p>
+    </footer>
+
+    <script>
+        function generateCode() {
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const telegram = document.getElementById('telegram').value.trim();
+            const github = document.getElementById('github').value.trim();
+            const vk = document.getElementById('vk').value.trim();
+            const instagram = document.getElementById('instagram').value.trim();
+
+            const clean = (val) => val.replace('@', '').replace('https://t.me/', '').replace('https://github.com/', '').replace('https://vk.com/', '').replace('https://instagram.com/', '');
+
+            let html = '                <ul class="contacts-list">\n';
+
+            if (phone) html += `                    <li><span class="contact-icon">📱</span><span class="contact-label">Телефон:</span><a href="tel:${phone.replace(/\s/g, '')}">${phone}</a></li>\n`;
+            if (email) html += `                    <li><span class="contact-icon">✉️</span><span class="contact-label">Email:</span><a href="mailto:${email}">${email}</a></li>\n`;
+            if (telegram) html += `                    <li><span class="contact-icon">💬</span><span class="contact-label">Telegram:</span><a href="https://t.me/${clean(telegram)}" target="_blank">${telegram}</a></li>\n`;
+            if (github) html += `                    <li><span class="contact-icon">🐙</span><span class="contact-label">GitHub:</span><a href="https://github.com/${clean(github)}" target="_blank">${github}</a></li>\n`;
+            if (vk) html += `                    <li><span class="contact-icon">🔵</span><span class="contact-label">ВКонтакте:</span><a href="https://vk.com/${clean(vk)}" target="_blank">${vk}</a></li>\n`;
+            if (instagram) html += `                    <li><span class="contact-icon">📷</span><span class="contact-label">Instagram:</span><a href="https://instagram.com/${clean(instagram)}" target="_blank">${instagram}</a></li>\n`;
+
+            html += '                </ul>';
+
+            document.getElementById('output').value = html;
+        }
+
+        function copyCode() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Код скопирован! Вставь его в contacts.html вместо старого <ul class="contacts-list">...</ul>');
+        }
+    </script>
+</body>
+</html>
